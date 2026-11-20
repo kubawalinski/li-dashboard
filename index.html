@@ -1,10 +1,102 @@
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="pl" data-theme="dark">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Li Auto i6</title>
-<style>body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;font-family:system-ui,sans-serif;background:#111;color:#eee}h1{font-weight:600;font-size:3rem}</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#111617">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta name="description" content="Twój dashboard w Li Auto. Zegar, playlisty Spotify i YouTube w jednym miejscu.">
+  <title>Li Auto — Twój dashboard</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <script src="playlist-links.js" defer></script>
+  <script src="app.js" defer></script>
 </head>
-<body><h1>Li Auto i6</h1></body>
+<body>
+  <svg class="svg-library" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <symbol id="icon-spotify" viewBox="0 0 24 24"><path fill="currentColor" d="M12 0a12 12 0 1 0 0 24 12 12 0 0 0 0-24Zm5.5 17.3a.75.75 0 0 1-1.03.25c-2.82-1.72-6.36-2.1-10.54-1.14a.75.75 0 1 1-.34-1.46c4.57-1.05 8.5-.6 11.66 1.32a.75.75 0 0 1 .25 1.03Zm1.47-3.27a.94.94 0 0 1-1.29.31C14.46 12.36 9.54 11.79 5.72 13a.94.94 0 0 1-.57-1.79c4.36-1.38 9.79-.73 13.51 1.54a.94.94 0 0 1 .31 1.29Zm.13-3.4C15.24 8.34 8.87 8.13 5.19 9.24a1.13 1.13 0 0 1-.65-2.15c4.23-1.28 11.27-1.03 15.71 1.61a1.13 1.13 0 0 1-1.15 1.93Z"/></symbol>
+    <symbol id="icon-youtube" viewBox="0 0 24 24"><path fill="currentColor" d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1c.5-1.9.5-5.8.5-5.8s0-3.9-.5-5.8ZM9.6 15.6V8.4l6.2 3.6-6.2 3.6Z"/></symbol>
+    <symbol id="icon-edit" viewBox="0 0 24 24"><path d="m14 5 5 5M4 20l4.5-1 12-12a2.2 2.2 0 0 0-3.1-3.1l-12 12L4 20Z"/></symbol>
+    <symbol id="icon-expand" viewBox="0 0 24 24"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5"/></symbol>
+    <symbol id="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></symbol>
+    <symbol id="icon-close" viewBox="0 0 24 24"><path d="m6 6 12 12M6 18 18 6"/></symbol>
+    <symbol id="icon-play" viewBox="0 0 24 24"><path fill="currentColor" stroke="none" d="M8 4v16l13-8L8 4Z"/></symbol>
+    <symbol id="icon-link" viewBox="0 0 24 24"><path d="m10 14 4-4m-6 2-3 3a3.5 3.5 0 0 0 5 5l3-3m-2-10 3-3a3.5 3.5 0 0 1 5 5l-3 3"/></symbol>
+  </svg>
+  <header class="topbar">
+    <a class="brand" href="./" aria-label="Li Auto — pulpit"><span class="brand-mark">li<span>.</span></span><span class="brand-divider"></span><span class="brand-name">LI AUTO<span>TWÓJ DASHBOARD</span></span></a>
+    <div class="toolbar">
+      <button class="tool-button" id="theme-toggle" type="button" aria-label="Włącz jasny wygląd" title="Zmień wygląd"><svg class="icon"><use href="#icon-sun"></use></svg><span id="theme-label">Jasny wygląd</span></button>
+      <button class="tool-button" id="fullscreen-toggle" type="button" aria-label="Włącz pełny ekran" hidden><svg class="icon"><use href="#icon-expand"></use></svg><span id="fullscreen-label">Pełny ekran</span></button>
+    </div>
+  </header>
+  <main id="main">
+    <section class="welcome" aria-label="Zegar i powitanie">
+      <div class="welcome-copy"><p class="eyebrow"><span class="small-line"></span> TWOJA PRZESTRZEŃ W LI AUTO</p><h1 id="greeting">Dobrze Cię widzieć.</h1><p class="welcome-caption">Twoje playlisty. Twój czas.</p></div>
+      <div class="clock-block"><time id="clock" class="clock" aria-label="Bieżąca godzina">--:--</time><p id="date" class="date">Czas urządzenia</p></div>
+    </section>
+    <div class="section-heading"><h2>Twoje media<span class="heading-dot">.</span></h2><span class="section-caption">Odtwarzaj tutaj. Więcej znajdziesz w pełnej wersji.</span></div>
+    <p id="offline-message" class="notice" role="status" hidden>Brak połączenia z siecią. Zegar działa dalej; odtwarzacze potrzebują internetu.</p>
+    <p id="storage-message" class="notice" role="status" hidden>Ta przeglądarka nie pozwala zapisać ustawień. Playlisty będą działać do odświeżenia strony.</p>
+    <section class="media-grid" aria-label="Odtwarzacze playlist">
+      <article class="media-card spotify-card" id="spotify-card">
+        <header class="card-heading">
+          <a class="service-title" href="https://open.spotify.com/" target="_blank" rel="noopener" aria-label="Otwórz Spotify w nowej karcie"><span class="service-logo"><svg><use href="#icon-spotify"></use></svg></span><div><h3>Spotify</h3><p id="spotify-label">Twoja playlista</p></div></a>
+          <button class="edit-button" type="button" data-edit="spotify" aria-label="Zmień playlistę Spotify"><svg class="icon"><use href="#icon-edit"></use></svg><span>Zmień playlistę</span></button>
+        </header>
+        <div class="player-area spotify-player" id="spotify-player-area">
+          <div class="player-placeholder" id="spotify-placeholder">
+            <div class="sound-art" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+            <h4>Włącz swój rytm.</h4><p>Dodaj publiczną playlistę Spotify<br>i słuchaj bezpośrednio tutaj.</p>
+            <button class="accent-button" type="button" data-edit="spotify"><svg class="icon"><use href="#icon-link"></use></svg>Dodaj playlistę</button>
+            <button class="sample-button" type="button" data-sample="spotify">Wypróbuj przykładową playlistę</button>
+          </div>
+          <iframe id="spotify-player" title="Odtwarzacz playlisty Spotify" width="100%" height="352" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" allowfullscreen referrerpolicy="strict-origin-when-cross-origin" hidden></iframe>
+        </div>
+        <div class="player-tools" id="spotify-player-tools" hidden><button type="button" class="text-button" data-reload="spotify">Odśwież odtwarzacz</button><button type="button" class="text-button" data-stop="spotify">Zatrzymaj</button></div>
+      </article>
+      <article class="media-card youtube-card" id="youtube-card">
+        <header class="card-heading">
+          <a class="service-title" href="https://www.youtube.com/" target="_blank" rel="noopener" aria-label="Otwórz YouTube w nowej karcie"><span class="service-logo"><svg><use href="#icon-youtube"></use></svg></span><div><h3>YouTube</h3><p id="youtube-label">Twoja playlista</p></div></a>
+          <button class="edit-button" type="button" data-edit="youtube" aria-label="Zmień playlistę YouTube"><svg class="icon"><use href="#icon-edit"></use></svg><span>Zmień playlistę</span></button>
+        </header>
+        <div class="player-area youtube-player" id="youtube-player-area">
+          <div class="player-placeholder" id="youtube-placeholder">
+            <div class="video-art" aria-hidden="true"><div class="video-ring"></div><div class="video-play"><svg><use href="#icon-play"></use></svg></div><div class="video-horizon"></div></div>
+            <h4>Co dziś oglądamy?</h4><p>Koncerty, teledyski, ulubione serie.<br>Jedna playlista, wiele możliwości.</p>
+            <button class="accent-button" type="button" data-edit="youtube"><svg class="icon"><use href="#icon-link"></use></svg>Dodaj playlistę</button>
+            <button class="sample-button" type="button" data-sample="youtube">Wypróbuj przykładową playlistę</button>
+          </div>
+          <iframe id="youtube-player" title="Odtwarzacz playlisty YouTube" width="100%" height="352" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin" hidden></iframe>
+        </div>
+        <div class="player-tools" id="youtube-player-tools" hidden><button type="button" class="text-button" data-reload="youtube">Odśwież odtwarzacz</button><button type="button" class="text-button" data-stop="youtube">Zatrzymaj</button></div>
+      </article>
+    </section>
+    <details class="help" id="help">
+      <summary><span class="help-icon">?</span> Jak korzystać z dashboardu?<span class="summary-chevron"></span></summary>
+      <div class="help-content">
+        <div><h3>Dodaj własne playlisty</h3><p>W Spotify lub YouTube wybierz „Udostępnij” i skopiuj link do playlisty. W panelu kliknij „Dodaj playlistę” lub „Zmień playlistę” i wklej link. Wybrana playlista zostanie zapamiętana w tej przeglądarce, również po ponownym otwarciu strony.</p></div>
+        <div><h3>Jakie playlisty działają?</h3><p>Spotify: użyj publicznej playlisty. YouTube: publicznej lub niepublicznej dostępnej przez link. Prywatne playlisty, automatyczne miksy i materiały z blokadą osadzania mogą nie działać. Odtwarzanie Spotify może być ograniczone do fragmentów, zależnie od konta i obsługi multimediów w przeglądarce samochodu.</p></div>
+        <div><h3>Pełny serwis i własne konto</h3><p>Kliknij logo lub nazwę Spotify albo YouTube w nagłówku panelu, aby otworzyć pełny serwis w nowej karcie. Tam możesz się zalogować, wyszukiwać i przeglądać bibliotekę. Dashboard pozostaje w swojej karcie. Nie przechowuje haseł ani nie synchronizuje kont; wszyscy korzystający z tej przeglądarki widzą te same zapisane playlisty.</p></div>
+      </div>
+    </details>
+    <footer class="page-footer"><span>LI AUTO <span class="footer-separator">/</span> MEDIA DASHBOARD</span><span>Playlisty zapisane na tym urządzeniu</span></footer>
+    <noscript><p class="notice">Włącz JavaScript, aby korzystać z zegara i dodawać playlisty. Linki do pełnych serwisów działają bez JavaScript.</p></noscript>
+  </main>
+  <div class="modal-backdrop" id="playlist-modal" hidden>
+    <section class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-describedby="modal-description" tabindex="-1">
+      <button class="close-button" id="modal-close" type="button" aria-label="Zamknij"><svg class="icon"><use href="#icon-close"></use></svg></button>
+      <p class="eyebrow" id="modal-service">SPOTIFY</p><h2 id="modal-title">Twoja playlista</h2><p id="modal-description">Wklej link do publicznej playlisty Spotify.</p>
+      <form id="playlist-form" novalidate>
+        <label for="playlist-url">Link do playlisty</label>
+        <input id="playlist-url" name="url" type="url" inputmode="url" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="https://open.spotify.com/playlist/…" maxlength="2048" aria-describedby="playlist-error">
+        <p id="playlist-error" class="form-error" role="alert" hidden></p>
+        <p class="form-note">Zapamiętamy link w tej przeglądarce. Dane konta pozostają w serwisie.</p>
+        <div class="modal-actions"><button class="primary-button" type="submit">Zapisz i otwórz</button><button class="secondary-button" id="modal-cancel" type="button">Anuluj</button></div>
+        <button class="text-button remove-button" id="remove-playlist" type="button" hidden>Usuń zapisaną playlistę</button>
+      </form>
+    </section>
+  </div>
+  <div id="announcement" class="sr-only" role="status" aria-live="polite"></div>
+</body>
 </html>
