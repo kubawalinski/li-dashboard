@@ -5,6 +5,7 @@ Statyczny dashboard dla przeglądarki Li Auto, publikowany przez GitHub Pages po
 ## Funkcje
 
 - Duży zegar 24-godzinny i polska data według czasu urządzenia.
+- Krótka nazwa skrótu „Dashboard” i ikona panelu multimediów w formatach PNG, SVG oraz ICO, z manifestem i ikoną ekranu startowego.
 - Oficjalne odtwarzacze playlist Spotify i YouTube; nie rozpoczynają odtwarzania automatycznie.
 - Własne playlisty przez „Dodaj playlistę” / „Zmień playlistę”, automatyczne nazwy playlist, usuwanie wyboru i playlisty przykładowe.
 - Ostatnie playlisty i wygląd zapisane w `localStorage` danej przeglądarki; bez kont dashboardu, tokenów i haseł.
@@ -22,6 +23,14 @@ Osadzone odtwarzacze nie są pełnymi aplikacjami. Do logowania, wyszukiwania i 
 Nazwy playlist pobierane są z oficjalnych endpointów oEmbed Spotify i YouTube bez kluczy API i bez danych logowania. Nazwa jest zapisywana jako zwykły tekst, aktualizowana przy otwarciu dashboardu i zmianie playlisty. Po 8 sekundach lub błędzie pozostaje ostatni prawidłowy tytuł albo neutralny podpis „Playlista Spotify” / „Playlista YouTube”. Linki do filmów z `list=…` są najpierw zamieniane na adres playlisty, aby nie pobrać tytułu pojedynczego filmu. Spóźnione odpowiedzi poprzedniej playlisty są ignorowane.
 
 Iframe'y nie łączą się z serwisami, dopóki użytkownik nie doda playlisty lub nie wybierze przykładowej. Zapisane playlisty wczytują się przy kolejnym otwarciu dashboardu. Wszystkie osoby używające tej samej przeglądarki widzą te same playlisty. Zatrzymanie nie usuwa zapisanego wyboru; wznowienie wczytuje odtwarzacz od nowa.
+
+## Skrót na ekranie startowym Li Auto
+
+Tytuł strony, `application-name`, `apple-mobile-web-app-title` oraz manifestowe `name` i `short_name` mają nazwę **Dashboard** (9 znaków), aby etykieta skrótu była krótka. Strona deklaruje PNG 192/512, osobną ikonę maskable 512, ikonę touch 180, SVG oraz klasyczny wielorozmiarowy ICO 16/32/48. Manifest zachowuje uruchamianie w przeglądarce (`display: browser`).
+
+Już dodany skrót może zachować dawną ikonę i nazwę w pamięci launchera. Po wdrożeniu odśwież stronę i dodaj skrót ponownie w samochodzie. Nie trzeba usuwać danych przeglądarki ani zapisanych playlist. Obsługa aktualizacji istniejącego skrótu zależy od Li Auto.
+
+Źródłem wektorowym jest `favicon.svg`; statyczne PNG i ICO można odtworzyć na Windows poleceniem `pwsh -File scripts/generate-icons.ps1` (System.Drawing, bez zewnętrznych zależności).
 
 ## Rozmiar interfejsu w samochodzie
 
