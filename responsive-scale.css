@@ -1,0 +1,79 @@
+/* CSS zoom does not change viewport media queries. These attributes mirror
+   the existing breakpoints using the controller's effective layout width. */
+html[data-ui-diagnostics-stacked] .device-grid{grid-template-columns:1fr}
+html[data-ui-diagnostics-stacked] .diagnostic-button{max-width:none}
+
+html[data-ui-small] .topbar{height:88px}
+html[data-ui-small] .card-heading{padding:16px;min-height:90px}
+html[data-ui-small] .service-title{gap:9px}
+html[data-ui-small] .service-logo{width:35px}
+html[data-ui-small] .service-logo svg{width:30px}
+html[data-ui-small] .edit-button{padding:10px;gap:6px}
+html[data-ui-small] .media-grid{gap:18px}
+html[data-ui-small] .welcome{min-height:220px}
+html[data-ui-small] .section-caption{font-size:.82rem}
+
+html[data-ui-stacked] .media-grid{grid-template-columns:1fr}
+html[data-ui-stacked] .welcome{min-height:210px}
+html[data-ui-stacked] .welcome-copy .eyebrow{font-size:.65rem}
+html[data-ui-stacked] .clock{font-size:6rem}
+html[data-ui-stacked] .section-caption{display:none}
+html[data-ui-stacked] .help-content{grid-template-columns:1fr;gap:22px}
+html[data-ui-stacked] .player-area{margin:0 12px}
+html[data-ui-stacked] .youtube-player.is-loaded{min-height:0}
+html[data-ui-stacked] .youtube-player iframe{height:auto;aspect-ratio:16/9;min-height:280px}
+html[data-ui-stacked] .tool-button{width:48px;min-height:48px;font-size:.8rem;padding:10px}
+html[data-ui-stacked] .tool-button span,
+html[data-ui-stacked] .scale-control>span{display:none}
+html[data-ui-stacked] .scale-control select{width:112px;min-width:0}
+html[data-ui-stacked] .card-heading{padding:18px 24px}
+
+/* Viewport units would themselves be magnified by CSS zoom. Use the logical
+   height supplied by the controller so the overlay and dialog stay reachable. */
+.modal-backdrop{bottom:auto;height:var(--ui-viewport-height,100vh)}
+.modal{max-height:calc(var(--ui-viewport-height,100vh) - 48px)}
+
+html[data-ui-phone] .topbar{height:auto;min-height:82px;padding:12px 5%;gap:12px;flex-wrap:wrap}
+html[data-ui-phone] .brand{gap:14px}
+html[data-ui-phone] .brand-mark{font-size:2.8rem}
+html[data-ui-phone] .brand-name,
+html[data-ui-phone] .brand-divider{display:none}
+html[data-ui-phone] .toolbar{gap:6px;max-width:100%;flex-wrap:wrap;justify-content:flex-end}
+html[data-ui-phone] .tool-button{width:48px;min-height:48px;padding:10px}
+html[data-ui-phone] .tool-button span,
+html[data-ui-phone] .scale-control>span{display:none}
+html[data-ui-phone] .scale-control{gap:0;padding:0;flex-shrink:0}
+html[data-ui-phone] .scale-control select{width:112px;min-width:0}
+html[data-ui-phone] main{width:90%}
+html[data-ui-phone] .welcome{padding:30px 0 26px;gap:28px;align-items:flex-start;flex-direction:column}
+html[data-ui-phone] .welcome-copy .eyebrow{font-size:.65rem;margin-bottom:14px}
+html[data-ui-phone] h1{font-size:2.15rem}
+html[data-ui-phone] .welcome-caption{font-size:1rem}
+html[data-ui-phone] .clock-block{text-align:left}
+html[data-ui-phone] .clock{font-size:6.6rem}
+html[data-ui-phone] .date{font-size:.9rem;margin-top:10px}
+html[data-ui-phone] .section-heading{margin:2px 0 16px}
+html[data-ui-phone] .card-heading{padding:16px 13px;gap:8px}
+html[data-ui-phone] .service-title h3{font-size:1.2rem}
+html[data-ui-phone] .service-title p{font-size:.8rem}
+html[data-ui-phone] .service-logo{width:30px}
+html[data-ui-phone] .edit-button{width:48px;height:48px}
+html[data-ui-phone] .edit-button span{display:none}
+html[data-ui-phone] .edit-button .icon{width:20px;height:20px}
+html[data-ui-phone] .player-area{margin:0 8px}
+html[data-ui-phone] .player-area iframe{min-width:0}
+html[data-ui-phone] .youtube-player iframe{min-height:220px}
+html[data-ui-phone] .page-footer{flex-direction:column;gap:10px}
+html[data-ui-phone] .device-card{padding:15px 12px;gap:9px;flex-wrap:wrap}
+html[data-ui-phone] .device-icon{width:28px}
+html[data-ui-phone] .device-heading{gap:8px}
+html[data-ui-phone] .device-copy{flex-basis:calc(100% - 40px)}
+html[data-ui-phone] .diagnostic-button{margin-left:37px;min-height:44px}
+html[data-ui-phone] .device-grid{gap:12px;margin-bottom:24px}
+html[data-ui-phone] .modal-backdrop{padding:12px}
+html[data-ui-phone] .modal{padding:28px 20px;max-height:calc(var(--ui-viewport-height,100vh) - 24px);border-radius:18px}
+html[data-ui-phone] .modal h2{font-size:1.75rem}
+html[data-ui-phone] .modal-actions{flex-wrap:wrap}
+html[data-ui-phone] .secondary-button{padding:14px 18px}
+html[data-ui-phone] .modal>p:not(.eyebrow){font-size:.95rem}
+html[data-ui-phone] .player-placeholder h4{font-size:1.6rem}

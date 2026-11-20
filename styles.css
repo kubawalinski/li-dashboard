@@ -13,7 +13,7 @@ button:disabled{opacity:.5;cursor:default}
 button,.service-title{transition:background-color .15s,color .15s,border-color .15s}
 .icon{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
 .svg-library{position:absolute;width:0;height:0;overflow:hidden}
-.topbar{height:106px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;padding:0 3.5%;max-width:1920px;margin:auto}
+.topbar{height:80px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;gap:18px;padding:0 3.5%;max-width:1920px;margin:auto}
 .brand{display:flex;align-items:center;gap:22px;text-decoration:none}
 .brand-mark{font-size:3.1rem;font-weight:650;letter-spacing:-.32rem;line-height:1;padding-right:6px}
 .brand-mark span{color:var(--green)}
@@ -21,11 +21,15 @@ button,.service-title{transition:background-color .15s,color .15s,border-color .
 .brand-name{font-size:.9rem;letter-spacing:.16em;font-weight:650}
 .brand-name>span{display:block;font-size:.65rem;letter-spacing:.17em;color:var(--muted);margin-top:7px}
 .toolbar{display:flex;gap:12px}
+.scale-control{display:flex;align-items:center;gap:9px;margin:0;position:relative;font-size:.88rem;font-weight:550;color:var(--muted)}
+.scale-control select{appearance:none;-webkit-appearance:none;width:125px;min-height:52px;padding:12px 28px 12px 12px;border:1px solid var(--border);border-radius:12px;background:var(--bg);color:var(--text);font:inherit;cursor:pointer}
+.scale-control:after{content:"";position:absolute;right:14px;top:21px;width:7px;height:7px;border-right:1.5px solid var(--muted);border-bottom:1.5px solid var(--muted);transform:rotate(45deg);pointer-events:none}
+.scale-control select:focus-visible{outline:3px solid var(--green);outline-offset:5px}
 .tool-button{display:flex;gap:10px;align-items:center;justify-content:center;min-height:52px;padding:12px 18px;border:1px solid var(--border);border-radius:12px;background:transparent;font-size:.88rem;font-weight:550}
 .tool-button:hover,.edit-button:hover,.text-button:hover{background:var(--surface-raised)}
 main{width:93%;max-width:1786px;margin:0 auto}
-.welcome{display:flex;align-items:center;justify-content:space-between;gap:32px;min-height:244px;padding:32px 0 26px}
-.eyebrow{display:flex;align-items:center;gap:10px;font-size:.76rem;font-weight:600;letter-spacing:.15em;color:var(--muted);margin:0 0 20px}
+.welcome{display:flex;align-items:center;justify-content:space-between;gap:32px;min-height:176px;padding:24px 0}
+.eyebrow{display:flex;align-items:center;gap:10px;font-size:.76rem;font-weight:600;letter-spacing:.15em;color:var(--muted);margin:0 0 14px}
 .small-line{width:24px;height:2px;background:var(--green)}
 h1{font-size:clamp(2rem,3.15vw,3.3rem);font-weight:450;letter-spacing:-.04em;margin:0 0 10px;line-height:1.15}
 .welcome-caption{color:var(--muted);margin:0;font-size:1.08rem;letter-spacing:.005em}
@@ -60,7 +64,7 @@ h1{font-size:clamp(2rem,3.15vw,3.3rem);font-weight:450;letter-spacing:-.04em;mar
 .media-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
 .media-card{min-width:0;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;padding-bottom:12px;--accent:var(--green);--accent-text:#15241a}
 .youtube-card{--accent:var(--salmon);--accent-text:#392117}
-.card-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:96px;padding:18px 24px}
+.card-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:80px;padding:12px 24px}
 .service-title{display:flex;align-items:center;gap:14px;flex:1;min-width:0;min-height:52px;text-decoration:none;border-radius:8px}
 .service-title>div{flex:1;min-width:0}
 .service-title:hover h3{color:var(--accent)}
@@ -143,7 +147,6 @@ body.modal-open{overflow:hidden}
 [data-theme="light"] .form-error{color:#a1371d}
 [data-theme="light"] .sound-art i{background:#bcf5ce}
 [data-theme="light"] .video-play{color:#ffc3a8}
-@media(min-width:921px) and (max-height:950px){.topbar{height:80px}.welcome{min-height:176px;padding:24px 0}.clock{font-size:6.8rem}.eyebrow{margin-bottom:14px}.section-heading{margin-bottom:16px}.card-heading{min-height:80px;padding-top:12px;padding-bottom:12px}}
 @media(max-width:1150px){.topbar{height:88px}.card-heading{padding:16px;min-height:90px}.service-title{gap:9px}.service-logo{width:35px}.service-logo svg{width:30px}.edit-button{padding:10px;gap:6px}.media-grid{gap:18px}.welcome{min-height:220px}.section-caption{font-size:.82rem}}
 @media(max-width:920px){.media-grid{grid-template-columns:1fr}.welcome{min-height:210px}.welcome-copy .eyebrow{font-size:.65rem}.clock{font-size:6rem}.section-caption{display:none}.help-content{grid-template-columns:1fr;gap:22px}.player-area{margin:0 12px}.youtube-player iframe{height:auto;aspect-ratio:16/9;min-height:280px}.tool-button{font-size:.8rem;padding:10px 14px}.card-heading{padding:18px 24px}}
 @media(max-width:620px){.topbar{height:82px;padding:0 5%}.brand{gap:14px}.brand-mark{font-size:2.8rem}.brand-name{font-size:.75rem}.brand-name>span{font-size:.55rem}.toolbar{gap:6px}.tool-button{width:48px;min-height:48px;padding:10px}.tool-button span{display:none}main{width:90%}.welcome{padding:30px 0 26px;gap:28px;align-items:flex-start;flex-direction:column}.welcome-copy .eyebrow{font-size:.65rem;margin-bottom:14px}h1{font-size:2.15rem}.welcome-caption{font-size:1rem}.clock-block{text-align:left}.clock{font-size:6.6rem}.date{font-size:.9rem;margin-top:10px}.section-heading{margin:2px 0 16px}.card-heading{padding:16px 13px;gap:8px}.service-title h3{font-size:1.2rem}.service-title p{font-size:.8rem}.service-logo{width:30px}.edit-button{width:48px;height:48px}.edit-button span{display:none}.edit-button .icon{width:20px;height:20px}.player-area{margin:0 8px}.player-area iframe{min-width:0}.youtube-player iframe{min-height:220px}.page-footer{flex-direction:column;gap:10px}.modal-backdrop{padding:12px}.modal{padding:28px 20px;max-height:calc(100vh - 24px);max-height:calc(100dvh - 24px);border-radius:18px}.modal h2{font-size:1.75rem}.modal-actions{flex-wrap:wrap}.secondary-button{padding:14px 18px}.modal>p:not(.eyebrow){font-size:.95rem}.player-placeholder h4{font-size:1.6rem}}

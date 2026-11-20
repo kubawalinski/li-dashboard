@@ -23,6 +23,12 @@ Nazwy playlist pobierane są z oficjalnych endpointów oEmbed Spotify i YouTube 
 
 Iframe'y nie łączą się z serwisami, dopóki użytkownik nie doda playlisty lub nie wybierze przykładowej. Zapisane playlisty wczytują się przy kolejnym otwarciu dashboardu. Wszystkie osoby używające tej samej przeglądarki widzą te same playlisty. Zatrzymanie nie usuwa zapisanego wyboru; wznowienie wczytuje odtwarzacz od nowa.
 
+## Rozmiar interfejsu w samochodzie
+
+W nagłówku wybierz **Rozmiar → Auto** lub ręczne powiększenie 100–250%. Auto powiększa cały dashboard na ekranach szerszych niż 1440 pikseli CSS (np. 200% przy szerokości 2880), łącznie z kontrolkami osadzonych odtwarzaczy. Ręczny wybór jest zapamiętany w tej przeglądarce i pozostaje taki sam przy wejściu lub wyjściu z pełnego ekranu. Zmiana rozmiaru nie przeładowuje odtwarzaczy.
+
+Układ dobiera kolumny według szerokości dostępnej po powiększeniu, a wysokość formularza według dostępnej wysokości. Na małym ekranie opcje, które zostawiłyby mniej niż 360 px szerokości, są wyłączone; zapisany zbyt duży rozmiar tymczasowo przechodzi na Auto. W przeglądarce bez CSS `zoom` pozostaje rozmiar 100%. Powiększona strona zachowuje przewijanie.
+
 ## Testy Bluetooth i GPS w samochodzie
 
 Dwa małe panele pod zegarem sprawdzają dostęp udostępniany stronie przez przeglądarkę. Zielony oznacza udany odczyt dostępności Web Bluetooth albo potwierdzony wybór urządzenia BLE / odczyt lokalizacji. Czerwony opisuje brak API, brak poprawnego HTTPS, odmowę dostępu lub nieudaną próbę odczytu. Stan „Do sprawdzenia” / „Nie potwierdzono” nie jest błędem sprzętu.
@@ -40,6 +46,7 @@ Można użyć dowolnego serwera statycznego. Otwieraj przez HTTP(S), nie `file:/
 node --check app.js
 node --check playlist-links.js
 node --check device-diagnostics.js
+node --check display-scale.js
 node --test tests/*.test.cjs
 ```
 
