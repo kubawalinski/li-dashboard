@@ -23,6 +23,15 @@ Nazwy playlist pobierane są z oficjalnych endpointów oEmbed Spotify i YouTube 
 
 Iframe'y nie łączą się z serwisami, dopóki użytkownik nie doda playlisty lub nie wybierze przykładowej. Zapisane playlisty wczytują się przy kolejnym otwarciu dashboardu. Wszystkie osoby używające tej samej przeglądarki widzą te same playlisty. Zatrzymanie nie usuwa zapisanego wyboru; wznowienie wczytuje odtwarzacz od nowa.
 
+## Testy Bluetooth i GPS w samochodzie
+
+Dwa małe panele pod zegarem sprawdzają dostęp udostępniany stronie przez przeglądarkę. Zielony oznacza udany odczyt dostępności Web Bluetooth albo potwierdzony wybór urządzenia BLE / odczyt lokalizacji. Czerwony opisuje brak API, brak poprawnego HTTPS, odmowę dostępu lub nieudaną próbę odczytu. Stan „Do sprawdzenia” / „Nie potwierdzono” nie jest błędem sprzętu.
+
+- Bluetooth: `getAvailability()` uruchamia się przy otwarciu strony, jeśli istnieje. Przycisk „Sprawdź Bluetooth” wywołuje `requestDevice({acceptAllDevices: true})` bezpośrednio po kliknięciu i otwiera wybór urządzenia. Test dotyczy BLE; nie testuje Bluetooth Classic / audio ani nie łączy się z usługami GATT.
+- GPS: kliknij „Sprawdź GPS” i zezwól stronie na lokalizację. Jednorazowy `getCurrentPosition()` żąda wysokiej dokładności, z limitem odczytu 15 sekund i bez używania starej pozycji. Widać wyłącznie powodzenie i dokładność; współrzędne nie są wyświetlane, zapisywane ani wysyłane przez dashboard. Geolokalizacja może korzystać z GPS lub sieci i nie potwierdza konkretnego odbiornika GPS.
+- Po 25 sekundach bez wyniku interfejs pozwala ponowić test; spóźnione wyniki poprzedniej próby są ignorowane. Czas oczekiwania na zgodę może nie być wliczany do timeoutu samego API.
+- Wymagany jest bezpieczny kontekst (`window.isSecureContext`). Publiczny HTTP zablokuje oba testy niezależnie od sprzętu; localhost zwykle jest bezpiecznym kontekstem. Domena `li.walin.ski` musi mieć prawidłowy certyfikat HTTPS. Testy nie zmieniają uprawnień strony ani ustawień samochodu.
+
 ## Sprawdzenie lokalne
 
 Można użyć dowolnego serwera statycznego. Otwieraj przez HTTP(S), nie `file://`: YouTube wymaga nagłówka Referer. Strona i iframe'y używają `strict-origin-when-cross-origin`.
@@ -30,7 +39,8 @@ Można użyć dowolnego serwera statycznego. Otwieraj przez HTTP(S), nie `file:/
 ```sh
 node --check app.js
 node --check playlist-links.js
-node --test tests/playlist-links.test.cjs
+node --check device-diagnostics.js
+node --test tests/*.test.cjs
 ```
 
 Przed publikacją: sprawdź oba przykłady, zmianę playlisty, błędny link, zachowanie po odświeżeniu, usunięcie, zatrzymanie/wznowienie, tryby wyglądu i szerokości ekranu.
@@ -42,3 +52,5 @@ Przed publikacją: sprawdź oba przykłady, zmianę playlisty, błędny link, za
 - [Spotify — prywatność playlist](https://support.spotify.com/us/article/playlist-privacy-and-access/)
 - [YouTube — osadzanie filmów i playlist](https://support.google.com/youtube/answer/171780?hl=en)
 - [YouTube — prywatność playlist](https://support.google.com/youtube/answer/3127309?hl=en)
+- [Chrome — Web Bluetooth i wymagania dostępu](https://developer.chrome.com/docs/capabilities/bluetooth)
+- [W3C — Geolocation](https://www.w3.org/TR/geolocation/)

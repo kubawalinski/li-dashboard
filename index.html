@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="styles.css">
   <script src="playlist-links.js" defer></script>
   <script src="app.js" defer></script>
+  <script src="device-diagnostics.js" defer></script>
 </head>
 <body>
   <svg class="svg-library" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -22,6 +23,8 @@
     <symbol id="icon-close" viewBox="0 0 24 24"><path d="m6 6 12 12M6 18 18 6"/></symbol>
     <symbol id="icon-play" viewBox="0 0 24 24"><path fill="currentColor" stroke="none" d="M8 4v16l13-8L8 4Z"/></symbol>
     <symbol id="icon-link" viewBox="0 0 24 24"><path d="m10 14 4-4m-6 2-3 3a3.5 3.5 0 0 0 5 5l3-3m-2-10 3-3a3.5 3.5 0 0 1 5 5l-3 3"/></symbol>
+    <symbol id="icon-bluetooth" viewBox="0 0 24 24"><path d="m7 7 10 10-5 4V3l5 4L7 17"/></symbol>
+    <symbol id="icon-location" viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><circle cx="12" cy="12" r="2"/><path d="M12 2v3m0 14v3M2 12h3m14 0h3"/></symbol>
   </svg>
   <header class="topbar">
     <a class="brand" href="./" aria-label="Li Auto — pulpit"><span class="brand-mark">li<span>.</span></span><span class="brand-divider"></span><span class="brand-name">LI AUTO<span>TWÓJ DASHBOARD</span></span></a>
@@ -34,6 +37,18 @@
     <section class="welcome" aria-label="Zegar i powitanie">
       <div class="welcome-copy"><p class="eyebrow"><span class="small-line"></span> TWOJA PRZESTRZEŃ W LI AUTO</p><h1 id="greeting">Dobrze Cię widzieć.</h1><p class="welcome-caption">Twoje playlisty. Twój czas.</p></div>
       <div class="clock-block"><time id="clock" class="clock" aria-label="Bieżąca godzina">--:--</time><p id="date" class="date">Czas urządzenia</p></div>
+    </section>
+    <section class="device-grid" aria-label="Test dostępu do urządzeń">
+      <article class="device-card" id="bluetooth-diagnostic" data-state="untested">
+        <span class="device-icon"><svg class="icon" aria-hidden="true"><use href="#icon-bluetooth"></use></svg></span>
+        <div class="device-copy"><div class="device-heading"><h2>Bluetooth</h2><span class="device-status" id="bluetooth-status" role="status">Do sprawdzenia</span></div><p id="bluetooth-detail">Test dostępu do Web Bluetooth LE.</p></div>
+        <button type="button" class="diagnostic-button" id="bluetooth-test">Sprawdź Bluetooth</button>
+      </article>
+      <article class="device-card" id="gps-diagnostic" data-state="untested">
+        <span class="device-icon"><svg class="icon" aria-hidden="true"><use href="#icon-location"></use></svg></span>
+        <div class="device-copy"><div class="device-heading"><h2>GPS</h2><span class="device-status" id="gps-status" role="status">Do sprawdzenia</span></div><p id="gps-detail">Test lokalizacji przeglądarki, bez zapisywania pozycji.</p></div>
+        <button type="button" class="diagnostic-button" id="gps-test">Sprawdź GPS</button>
+      </article>
     </section>
     <div class="section-heading"><h2>Twoje media<span class="heading-dot">.</span></h2><span class="section-caption">Odtwarzaj tutaj. Więcej znajdziesz w pełnej wersji.</span></div>
     <p id="offline-message" class="notice" role="status" hidden>Brak połączenia z siecią. Zegar działa dalej; odtwarzacze potrzebują internetu.</p>

@@ -36,6 +36,27 @@ h1{font-size:clamp(2rem,3.15vw,3.3rem);font-weight:450;letter-spacing:-.04em;mar
 .section-heading h2{margin:0;font-size:1.35rem;letter-spacing:-.025em;font-weight:550}
 .heading-dot{color:var(--green)}
 .section-caption{font-size:.88rem;color:var(--muted)}
+.device-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:0 0 28px}
+.device-card{display:flex;align-items:center;gap:14px;padding:18px;border:1px solid var(--border);border-radius:16px;background:var(--surface);min-width:0}
+.device-icon{display:flex;align-items:center;justify-content:center;flex-shrink:0;width:38px;height:44px;color:var(--muted)}
+.device-icon .icon{width:28px;height:28px}
+.device-copy{flex:1;min-width:0}
+.device-heading{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.device-heading h2{font-size:1rem;font-weight:600;margin:0}
+.device-status{display:inline-flex;align-items:center;gap:7px;font-size:.875rem;color:var(--muted);line-height:1.4}
+.device-status:before{content:"";width:8px;height:8px;border-radius:50%;background:currentColor;flex-shrink:0}
+.device-copy p{font-size:.875rem;line-height:1.5;color:var(--muted);margin:7px 0 0}
+.device-card[data-state="available"] .device-status{color:#8de7ad}
+.device-card[data-state="unavailable"] .device-status{color:#ffa796}
+.device-card[data-state="pending"] .device-status{color:#e9d291}
+.diagnostic-button{min-height:48px;max-width:132px;border:1px solid var(--border);border-radius:10px;padding:10px 13px;background:transparent;font-size:.875rem;line-height:1.4;flex-shrink:0}
+.diagnostic-button:hover{background:var(--surface-raised)}
+.diagnostic-button:disabled{opacity:.55}
+[data-theme="light"] .device-card[data-state="available"] .device-status{color:#206a3c}
+[data-theme="light"] .device-card[data-state="unavailable"] .device-status{color:#a1371d}
+[data-theme="light"] .device-card[data-state="pending"] .device-status{color:#806014}
+@media(max-width:1050px){.device-grid{grid-template-columns:1fr}.diagnostic-button{max-width:none}}
+@media(max-width:620px){.device-card{padding:15px 12px;gap:9px;flex-wrap:wrap}.device-icon{width:28px}.device-heading{gap:8px}.device-copy{flex-basis:calc(100% - 40px)}.diagnostic-button{margin-left:37px;min-height:44px}.device-grid{gap:12px;margin-bottom:24px}}
 .media-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
 .media-card{min-width:0;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;padding-bottom:12px;--accent:var(--green);--accent-text:#15241a}
 .youtube-card{--accent:var(--salmon);--accent-text:#392117}
